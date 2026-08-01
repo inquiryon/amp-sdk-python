@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amp-sdk"
+version = "0.1.0"
+description = "Python SDK for the AMP Community governance API (experimental v0 contract)"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+# Zero runtime dependencies, deliberately: this SDK is a low-volume
+# governance-API client (not a high-throughput data-plane client), so the
+# connection-pooling/HTTP2 benefits of httpx/requests are not meaningfully
+# needed, and this project's other packages (amp-core: zero deps;
+# amp-community: one dependency, jsonschema, added only for a documented
+# security reason) already establish a minimal-dependency norm. Retry,
+# backoff, timeout, and redirect-refusal logic are hand-rolled over
+# urllib.request/http.client either way, so a third-party HTTP client
+# would add supply-chain surface without removing meaningful complexity
+# from this codebase. See README.md "HTTP dependency choice" for the full
+# tradeoff writeup, including when to revisit this (e.g. a real need for
+# HTTP/2 or connection pooling under sustained load).
+dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "mypy>=1.10", "ruff>=0.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+amp_sdk = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+
+[tool.mypy]
+# The installed mypy toolchain no longer supports type-checking against a
+# 3.9 target; the package itself still declares/supports Python >=3.9 (see
+# [project].requires-python) and avoids any 3.10+-only syntax.
+python_version = "3.10"
+strict = true
+packages = ["amp_sdk"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
