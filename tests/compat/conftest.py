@@ -11,7 +11,8 @@ from __future__ import annotations
 
 import os
 import tempfile
-from typing import Any, Dict, Iterator
+from collections.abc import Iterator
+from typing import Any
 
 import pytest
 
@@ -19,14 +20,14 @@ amp_community = pytest.importorskip(
     "amp_community", reason="amp-community is not installed; "
     "run `pip install -e ../amp-core -e ../amp-community` from the umbrella workspace")
 
-from amp_community.api import build_api_context  # noqa: E402
-from amp_community.api.server import start_background  # noqa: E402
+from amp_community.api import build_api_context
+from amp_community.api.server import start_background
 
 REVIEWER_TOKEN = "fictional-reviewer-token-0001"
 AGENT_TOKEN = "fictional-agent-token-0001"
 VIEWER_TOKEN = "fictional-viewer-token-0001"
 
-INVOICE_POLICY: Dict[str, Any] = {
+INVOICE_POLICY: dict[str, Any] = {
     "policy_id": "invoice-governance",
     "schema_version": "v0",
     "action_governance": {

@@ -6,7 +6,7 @@ import socket
 import threading
 import time
 import urllib.error
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable
 from urllib.request import OpenerDirector
 
 import pytest
@@ -19,7 +19,7 @@ from amp_sdk import (
     MalformedResponseError,
     NotFoundError,
     PolicyRejectedError,
-    TimeoutError,  # noqa: A004 - re-exported intentionally, see amp_sdk/__init__.py
+    TimeoutError,
     TransportError,
     ValidationError,
 )
@@ -27,7 +27,7 @@ from amp_sdk.client import RestClient
 
 
 class _FakeResponse:
-    def __init__(self, status: int, body: bytes, headers: Optional[Dict[str, str]] = None):
+    def __init__(self, status: int, body: bytes, headers: dict[str, str] | None = None):
         self.status = status
         self.code = status
         self._body = body
@@ -41,15 +41,15 @@ class _FakeResponse:
         self._pos += len(chunk)
         return chunk
 
-    def __enter__(self) -> "_FakeResponse":
+    def __enter__(self) -> _FakeResponse:  # noqa: PYI034 - avoid a typing_extensions dep for `Self` on Python 3.9/3.10
         return self
 
-    def __exit__(self, *exc: Any) -> None:
+    def __exit__(self, *exc: object) -> None:
         return None
 
 
 class _Headers:
-    def __init__(self, data: Dict[str, str]):
+    def __init__(self, data: dict[str, str]):
         self._data = {k.lower(): v for k, v in data.items()}
 
     def get(self, key: str, default: Any = None) -> Any:
@@ -61,7 +61,7 @@ class FakeOpener(OpenerDirector):
 
     def __init__(self, handler: Callable[[Any], _FakeResponse]):
         self._handler = handler
-        self.requests: List[Any] = []
+        self.requests: list[Any] = []
 
     def open(self, req: Any, data: Any = None, timeout: Any = None) -> _FakeResponse:  # type: ignore[override]
         self.requests.append(req)
@@ -73,16 +73,16 @@ class FakeOpener(OpenerDirector):
         return result
 
 
-def json_response(status: int, body: Any, headers: Optional[Dict[str, str]] = None) -> _FakeResponse:
+def json_response(status: int, body: Any, headers: dict[str, str] | None = None) -> _FakeResponse:
     return _FakeResponse(status, json.dumps(body).encode("utf-8"), headers)
 
 
 def make_client(handler: Callable[[Any], _FakeResponse], **overrides: Any) -> RestClient:
     opener = FakeOpener(handler)
-    kwargs: Dict[str, Any] = dict(
-        retry=None,
-        opener=opener,
-    )
+    kwargs: dict[str, Any] = {
+        "retry": None,
+        "opener": opener,
+    }
     kwargs.update(overrides)
     client = RestClient("http://127.0.0.1:8080", "fictional-token-do-not-use", **kwargs)
     client._opener = opener  # type: ignore[attr-defined]
@@ -260,7 +260,7 @@ def test_cancellation_during_backoff_raises_cancellation_error() -> None:
 
 
 def test_ampclient_modify_sends_structured_params() -> None:
-    seen: Dict[str, Any] = {}
+    seen: dict[str, Any] = {}
 
     def handler(req: Any) -> _FakeResponse:
         seen["body"] = json.loads(req.data.decode("utf-8"))
