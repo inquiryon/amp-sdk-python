@@ -27,8 +27,10 @@ python3 -m venv .venv
 
 The live compatibility suite (`pytest tests/compat -q`) requires
 `amp-core`/`amp-community` installed (`pip install -e ../amp-core -e
-../amp-community`) and is primarily a CI gate — it is not required for
-most contributions and skips cleanly when those packages are absent.
+../amp-community`) and is primarily a CI gate. CI checks out and imports
+both source packages explicitly, then treats any installation, startup, or
+scenario failure as blocking. Contributors running only the unit suite do
+not need the sibling packages.
 
 ## Before opening a PR
 

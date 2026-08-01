@@ -1,10 +1,9 @@
 # CI for amp-sdk-python (OSS-006).
 #
-# Requires no private repositories, private services, or production
-# secrets: the live-compat job installs amp-core/amp-community from the
-# public PyPI packages once published; until then it is allowed to fail
-# softly (continue-on-error) rather than block this repo's own CI, since
-# those packages are not yet published (see README.md "Publication status").
+# Requires no private services or production secrets. The live-compat job
+# checks out the public amp-core and amp-community source repositories and is
+# a hard gate: checkout, installation, startup, or scenario failures
+# fail CI.
 name: ci
 on: [push, pull_request]
 jobs:
@@ -28,17 +27,26 @@ jobs:
 
   live-compat:
     runs-on: ubuntu-latest
-    continue-on-error: true # amp-community is not yet published; see README.md
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/amp-core
+          path: vendor/amp-core
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/amp-community
+          path: vendor/amp-community
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip install -e ".[dev]"
-      - name: Install amp-core/amp-community
-        run: pip install inquiryon-amp-core inquiryon-amp-community
+      - name: Install amp-core and amp-community from reviewed source
+        run: |
+          python -m pip install -e ./vendor/amp-core -e ./vendor/amp-community
+          python -c "import amp_core, amp_community"
       - name: Live compatibility scenarios
-        run: pytest tests/compat -q
+        run: pytest tests/compat -q -ra
 
   package:
     runs-on: ubuntu-latest
