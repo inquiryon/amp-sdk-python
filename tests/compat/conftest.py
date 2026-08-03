@@ -16,12 +16,12 @@ from typing import Any
 
 import pytest
 
-amp_community = pytest.importorskip(
-    "amp_community", reason="amp-community is not installed; "
+inquiryon_amp_community = pytest.importorskip(
+    "inquiryon_amp_community", reason="amp-community is not installed; "
     "run `pip install -e ../amp-core -e ../amp-community` from the umbrella workspace")
 
-from amp_community.api import build_api_context
-from amp_community.api.server import start_background
+from inquiryon_amp_community.api import build_api_context
+from inquiryon_amp_community.api.server import start_background
 
 REVIEWER_TOKEN = "fictional-reviewer-token-0001"
 AGENT_TOKEN = "fictional-agent-token-0001"

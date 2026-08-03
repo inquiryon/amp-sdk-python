@@ -23,7 +23,7 @@ cat > /tmp/amp-example-config.json <<'EOF'
   ]
 }
 EOF
-.venv/bin/python -m amp_community.api --config /tmp/amp-example-config.json
+.venv/bin/python -m inquiryon_amp_community.api --config /tmp/amp-example-config.json
 ```
 
 Leave that running. In a second terminal:
