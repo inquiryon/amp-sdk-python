@@ -29,14 +29,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # The default GITHUB_TOKEN is scoped to this repo only and 404s on a
+      # second private repo, so these use a fine-grained PAT (Contents:
+      # Read-only, scoped to amp-core + amp-community) instead.
       - uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/amp-core
           path: vendor/amp-core
+          token: ${{ secrets.AMP_CORE_READ_TOKEN }}
       - uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/amp-community
           path: vendor/amp-community
+          token: ${{ secrets.AMP_CORE_READ_TOKEN }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
