@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "amp-sdk"
+name = "inquiryon-amp-sdk"
 version = "0.1.0"
 description = "Python SDK for the AMP Community governance API (experimental v0 contract)"
 readme = "README.md"
@@ -42,7 +42,7 @@ dev = ["pytest>=7", "mypy>=1.10", "ruff>=0.6"]
 where = ["src"]
 
 [tool.setuptools.package-data]
-amp_sdk = ["py.typed"]
+inquiryon_amp_sdk = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/unit"]
@@ -53,7 +53,7 @@ testpaths = ["tests/unit"]
 # [project].requires-python) and avoids any 3.10+-only syntax.
 python_version = "3.10"
 strict = true
-packages = ["amp_sdk"]
+packages = ["inquiryon_amp_sdk"]
 
 [tool.ruff]
 line-length = 100

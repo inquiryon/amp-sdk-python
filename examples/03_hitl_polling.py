@@ -13,7 +13,7 @@ import time
 
 from _shared import agent_client, ensure_policy, new_request_id, reviewer_client
 
-from amp_sdk.models import SubmitGovernedRequestInput
+from inquiryon_amp_sdk.models import SubmitGovernedRequestInput
 
 
 def main() -> None:

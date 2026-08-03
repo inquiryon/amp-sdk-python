@@ -68,7 +68,7 @@ jobs:
           python -c "
           import zipfile, sys
           names = zipfile.ZipFile(sorted(__import__('glob').glob('dist/*.whl'))[0]).namelist()
-          allowed_prefixes = ('amp_sdk/', 'amp_sdk-')
+          allowed_prefixes = ('inquiryon_amp_sdk/', 'inquiryon_amp_sdk-')
           bad = [n for n in names if not n.startswith(allowed_prefixes)]
           for n in sorted(names): print(n)
           if bad:
@@ -78,12 +78,12 @@ jobs:
         run: |
           python -m venv /tmp/install-test
           /tmp/install-test/bin/pip install dist/*.whl
-          /tmp/install-test/bin/python -c "import amp_sdk; print(amp_sdk.AmpClient, amp_sdk.__version__)"
+          /tmp/install-test/bin/python -c "import inquiryon_amp_sdk; print(inquiryon_amp_sdk.AmpClient, inquiryon_amp_sdk.__version__)"
       - name: Dependency/license audit (expect zero runtime deps)
         run: |
           pip install pip-licenses
           /tmp/install-test/bin/pip list
-          test -z "$(/tmp/install-test/bin/pip list --format=freeze | grep -v '^amp-sdk==' | grep -v '^pip==')" \
+          test -z "$(/tmp/install-test/bin/pip list --format=freeze | grep -v '^inquiryon-amp-sdk==' | grep -v '^pip==')" \
             || (echo "::error::unexpected runtime dependency installed"; exit 1)
 
   hygiene:

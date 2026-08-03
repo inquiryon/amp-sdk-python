@@ -42,7 +42,7 @@ from .retry import (
 )
 
 SDK_VERSION = "0.1.0"
-DEFAULT_USER_AGENT = f"amp-sdk-python/{SDK_VERSION}"
+DEFAULT_USER_AGENT = f"inquiryon-amp-sdk-python/{SDK_VERSION}"
 
 MAX_RESPONSE_BYTES = 10 * 1024 * 1024  # 10 MiB
 _LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}

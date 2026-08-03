@@ -34,12 +34,12 @@ CPython **>= 3.9**.
 ## Install
 
 ```bash
-pip install amp-sdk
+pip install inquiryon-amp-sdk
 ```
 
 (Not yet published to PyPI — see [Publication status](#publication-status).
 Until then, install from a local path or wheel: `pip install -e
-../amp-sdk-python` or `pip install ./amp_sdk-0.1.0-py3-none-any.whl`.)
+../amp-sdk-python` or `pip install ./inquiryon_amp_sdk-0.1.0-py3-none-any.whl`.)
 
 ## HTTP dependency choice
 
@@ -79,8 +79,8 @@ background thread. This is a deliberate, documented limitation.
 
 ```python
 import os
-from amp_sdk import AmpClient
-from amp_sdk.models import SubmitGovernedRequestInput
+from inquiryon_amp_sdk import AmpClient
+from inquiryon_amp_sdk.models import SubmitGovernedRequestInput
 
 client = AmpClient(
     "http://127.0.0.1:8080",
@@ -123,7 +123,7 @@ Every failure is a typed subclass of `AmpError` carrying the HTTP status
 retryable, and bounded structured details:
 
 ```python
-from amp_sdk import NotFoundError
+from inquiryon_amp_sdk import NotFoundError
 
 try:
     client.get_review("hitl-does-not-exist")
@@ -131,7 +131,7 @@ except NotFoundError as err:
     print(err.status, err.code)
 ```
 
-See `src/amp_sdk/errors.py` for the complete, exact mapping from server
+See `src/inquiryon_amp_sdk/errors.py` for the complete, exact mapping from server
 error code to SDK error type and retry classification.
 
 ## Retries and idempotency

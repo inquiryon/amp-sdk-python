@@ -14,7 +14,7 @@ import time
 
 import pytest
 
-from amp_sdk import (
+from inquiryon_amp_sdk import (
     AmpClient,
     AuthenticationError,
     CancellationError,
@@ -24,7 +24,7 @@ from amp_sdk import (
     TransportError,
     ValidationError,
 )
-from amp_sdk.models import SubmitGovernedRequestInput
+from inquiryon_amp_sdk.models import SubmitGovernedRequestInput
 
 # Kept in sync with conftest.py's server-fixture token/policy constants
 # (duplicated, not imported, to avoid relative-import packaging fragility
@@ -309,7 +309,7 @@ def test_audit_query_is_append_only_and_ordered(compat_server: str) -> None:
         policy_id="invoice-governance", tool="pay_invoice", action="submit",
         params={"amount": 5000}, request_id="req-scn20-0001"))
     r.approve(out["hitl_id"])
-    from amp_sdk.models import AuditQuery
+    from inquiryon_amp_sdk.models import AuditQuery
     events = r.list_audit_events(AuditQuery(request_id=out["request_id"]))["items"]
     types = [e["event_type"] for e in events]
     assert types[:4] == ["evaluation.completed", "decision.completed",

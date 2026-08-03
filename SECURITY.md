@@ -23,7 +23,7 @@ this stage. See `CHANGELOG.md` for the version history.
 
 ## Scope
 
-In scope: the SDK's own code (`src/amp_sdk/`) — request signing/transport,
+In scope: the SDK's own code (`src/inquiryon_amp_sdk/`) — request signing/transport,
 retry/idempotency logic, error handling, and anything that could leak a
 credential, follow an unintended redirect, or mishandle an untrusted
 server response.

@@ -11,7 +11,7 @@ from urllib.request import OpenerDirector
 
 import pytest
 
-from amp_sdk import (
+from inquiryon_amp_sdk import (
     AmpClient,
     AuthenticationError,
     CancellationError,
@@ -23,7 +23,7 @@ from amp_sdk import (
     TransportError,
     ValidationError,
 )
-from amp_sdk.client import RestClient
+from inquiryon_amp_sdk.client import RestClient
 
 
 class _FakeResponse:
@@ -311,7 +311,7 @@ def test_unknown_response_fields_pass_through() -> None:
 
     client = AmpClient("http://127.0.0.1:8080", "t")
     client.rest = make_client(handler)
-    from amp_sdk.models import SubmitGovernedRequestInput
+    from inquiryon_amp_sdk.models import SubmitGovernedRequestInput
     out = client.submit_governed_request(
         SubmitGovernedRequestInput(policy_id="p", tool="t", action="a", request_id="r1"))
     assert out["status"] == "allowed"
@@ -319,7 +319,7 @@ def test_unknown_response_fields_pass_through() -> None:
 
 
 def test_check_version_rejects_non_v0() -> None:
-    from amp_sdk import UnsupportedVersionError
+    from inquiryon_amp_sdk import UnsupportedVersionError
 
     def handler(req: Any) -> _FakeResponse:
         return json_response(200, {"name": "amp-community", "version": "9.9.9", "contracts": "v99"})

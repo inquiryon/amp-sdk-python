@@ -6,7 +6,7 @@ import os
 import random
 import time
 
-from amp_sdk import AmpClient
+from inquiryon_amp_sdk import AmpClient
 
 BASE_URL = os.environ.get("AMP_BASE_URL", "http://127.0.0.1:8080")
 REVIEWER_TOKEN = os.environ.get("AMP_REVIEWER_TOKEN", "fictional-reviewer-token-0001")
