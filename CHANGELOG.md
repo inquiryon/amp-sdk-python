@@ -4,12 +4,11 @@ All notable changes to this project are documented in this file. Format
 loosely follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project is `0.x`: minor versions may contain breaking changes, always
 called out below under an explicit **Breaking** heading (see the
-versioning policy in `oss-release/phase-5/sdk-compatibility-baseline.md`).
+versioning policy in `README.md`'s "Versioning policy" section).
 
 ## [0.1.0] — Unreleased
 
-Initial release. Implements the `v0` Community governance API contract
-baseline (`oss-release/phase-5/sdk-compatibility-baseline.md`).
+Initial release. Implements the `v0` Community governance API contract.
 
 ### Added
 

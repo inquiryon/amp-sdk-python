@@ -1,8 +1,7 @@
 """Shared live compatibility scenarios, run against a REAL amp-community
-server (not a mock). See oss-release/phase-5/compat-scenarios.md in the
-umbrella workspace for the scenario definitions this file implements —
-the TypeScript SDK's test/compat/live.test.ts implements the identical
-scenarios against the same contract. All data is fictional.
+server (not a mock). The TypeScript SDK's test/compat/live.test.ts
+implements the identical scenarios against the same contract. All data
+is fictional.
 
 Run: pytest tests/compat -q  (requires amp-core/amp-community installed;
 skips cleanly via conftest.py's importorskip if they are not).
@@ -185,8 +184,7 @@ def test_decision_polling(compat_server: str) -> None:
     # synchronously and the workitem is immediately closed to "resumed" —
     # there is no observable window where status == "approved". The
     # decision verb itself is the separate `decision` field. This is a
-    # real compatibility-report nuance (see
-    # oss-release/phase-5/sdk-compatibility-baseline.md), not a server bug.
+    # real API contract nuance, not a server bug.
     assert resolved["status"] == "resumed"
     assert resolved["decision"] == "approved"
     assert resolved["executed_params"] == {"amount": 5000}

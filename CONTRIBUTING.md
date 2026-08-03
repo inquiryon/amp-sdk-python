@@ -46,9 +46,9 @@ not need the sibling packages.
 
 ## Scope
 
-This SDK intentionally implements a small, stable governance API (see
-`oss-release/phase-5/sdk-compatibility-baseline.md` in the umbrella
-workspace). PRs that add Enterprise-only concepts, platform-specific
+This SDK intentionally implements a small, stable governance API — the
+`amp-community` `v0` REST contract, nothing more. PRs that add
+Enterprise-only concepts, platform-specific
 filesystem/polling behavior, or hidden telemetry will not be accepted —
 see the project's `README.md` "What this SDK is not" section.
 

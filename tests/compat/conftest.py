@@ -1,5 +1,5 @@
 """Spins up a real amp-community server in-process (not mocked HTTP) for
-the shared live compatibility scenarios (oss-release/phase-5/compat-scenarios.md).
+the shared live compatibility scenarios (see test_live.py).
 
 Requires amp-core and amp-community to be importable — install them from
 the umbrella workspace: `pip install -e ../amp-core -e ../amp-community`.

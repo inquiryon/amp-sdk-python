@@ -1,5 +1,4 @@
-"""Conservative retry policy (see oss-release/phase-5/sdk-compatibility-baseline.md
-"Errors and retryability"). Retries are bounded by attempt count AND a
+"""Conservative retry policy. Retries are bounded by attempt count AND a
 total timeout budget, use exponential backoff with jitter, and honor a
 server-supplied Retry-After header when present.
 """

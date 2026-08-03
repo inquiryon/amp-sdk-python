@@ -1,8 +1,7 @@
 """Typed request/response models for the AMP Community v0 governance API.
 
-Five decision/status vocabularies are DISTINCT and must never be conflated
-(see oss-release/phase-5/contract-compatibility-report.md in the umbrella
-workspace): EvaluationDecisionValue, SubmitStatus, ResolveDecisionInput,
+Five decision/status vocabularies are DISTINCT and must never be conflated:
+EvaluationDecisionValue, SubmitStatus, ResolveDecisionInput,
 ResolvedDecisionValue, WorkitemStatus.
 
 Response shapes are ``TypedDict`` with ``total=False`` on optional keys —

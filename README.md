@@ -12,11 +12,10 @@ production. Not yet published — see [Publication status](#publication-status).
 
 A small, typed client for the `amp-community` REST API (the "SDK
 compatibility boundary" served at `/api/v0/openapi.json`). It exposes
-exactly the operations documented in
-`oss-release/phase-5/sdk-compatibility-baseline.md` in the umbrella
-workspace this package was built alongside: evaluate a policy, submit a
-governed request, poll or wait for a decision, list/approve/reject/modify
-HITL reviews, check/retry callback delivery, and query the audit log.
+exactly the operations documented in that OpenAPI contract: evaluate a
+policy, submit a governed request, poll or wait for a decision,
+list/approve/reject/modify HITL reviews, check/retry callback delivery,
+and query the audit log.
 
 ## What this SDK is not
 
@@ -54,8 +53,7 @@ This package has **zero runtime dependencies** — it uses
   `httpx`/`requests` are not meaningfully needed here.
 - This project's other packages already establish a minimal-dependency
   norm: `amp-core` has zero dependencies; `amp-community` has exactly one
-  (`jsonschema`, added for a documented security reason — see
-  `oss-release/phase-5/contract-compatibility-report.md`).
+  (`jsonschema`, added for schema-validation correctness, not convenience).
 - Retry, backoff, timeout, and redirect-refusal logic (see below) is
   hand-rolled either way — a third-party HTTP client would not remove that
   complexity from this codebase, only add supply-chain surface.
@@ -133,9 +131,8 @@ except NotFoundError as err:
     print(err.status, err.code)
 ```
 
-See `oss-release/phase-5/sdk-compatibility-baseline.md`'s "Errors and
-retryability" table for the complete, exact mapping from server error code
-to SDK error type and retry classification.
+See `src/amp_sdk/errors.py` for the complete, exact mapping from server
+error code to SDK error type and retry classification.
 
 ## Retries and idempotency
 
@@ -163,11 +160,11 @@ document for the full policy and its rationale.
 
 ## Versioning policy
 
-This package is `0.1.0`, tracking the `v0` experimental API contract. See
-`oss-release/phase-5/sdk-compatibility-baseline.md` for the complete
-semantic-versioning policy, what counts as a breaking change during `0.x`,
-the deprecation process and minimum window, and the SDK/API compatibility
-matrix. **No v1.0 stability is declared or implied by this package.**
+This package is `0.1.0`, tracking the `v0` experimental API contract.
+During `0.x`, any change to request/response shapes, error classification,
+or retry semantics may ship in a minor version and will be called out
+under **Breaking** in `CHANGELOG.md`. **No v1.0 stability is declared or
+implied by this package.**
 
 ## Publication status
 
