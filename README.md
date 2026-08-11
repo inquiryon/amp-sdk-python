@@ -164,8 +164,7 @@ document for the full policy and its rationale.
 This package is `0.1.0`, tracking the `v0` API contract.
 During `0.x`, any change to request/response shapes, error classification,
 or retry semantics may ship in a minor version and will be called out
-under **Breaking** in `CHANGELOG.md`. **No v1.0 stability is declared or
-implied by this package.**
+under **Breaking** in `CHANGELOG.md`.
 
 ## Publication status
 
