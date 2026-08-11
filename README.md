@@ -4,9 +4,10 @@ Python SDK for the AMP Community governance API: policy evaluation,
 governed tool-call submission, human-in-the-loop (HITL) review, callback
 delivery, and audit-history queries.
 
-**Status: experimental `0.x`, implementing the `v0` API contract.** See
+Implements the `v0` API contract. See
 [the versioning policy](#versioning-policy) before depending on this in
-production. Not yet published — see [Publication status](#publication-status).
+production, and [Publication status](#publication-status) for install
+instructions.
 
 ## What this SDK is
 
@@ -160,7 +161,7 @@ document for the full policy and its rationale.
 
 ## Versioning policy
 
-This package is `0.1.0`, tracking the `v0` experimental API contract.
+This package is `0.1.0`, tracking the `v0` API contract.
 During `0.x`, any change to request/response shapes, error classification,
 or retry semantics may ship in a minor version and will be called out
 under **Breaking** in `CHANGELOG.md`. **No v1.0 stability is declared or
