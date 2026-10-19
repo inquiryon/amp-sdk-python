@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "inquiryon-amp-sdk"
 version = "0.1.0"
-description = "Python SDK for the AMP Community governance API (experimental v0 contract)"
+description = "Python SDK for the AMP Community governance API"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.9"

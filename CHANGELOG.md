@@ -6,7 +6,7 @@ This project is `0.x`: minor versions may contain breaking changes, always
 called out below under an explicit **Breaking** heading (see the
 versioning policy in `README.md`'s "Versioning policy" section).
 
-## [0.1.0] — Unreleased
+## [0.1.0] — 2026-10-19
 
 Initial release. Implements the `v0` Community governance API contract.
 
