@@ -6,11 +6,10 @@ this touches a real production system.
 
 ## 1. Start a local amp-community server
 
-From the umbrella workspace (one level up from this repo):
+Install `amp-community` from PyPI into its own virtualenv:
 
 ```bash
-cd ../amp-community
-python3 -m venv .venv && .venv/bin/pip install -e ../amp-core -e .
+python3 -m venv .venv-server && .venv-server/bin/pip install inquiryon-amp-community
 cat > /tmp/amp-example-config.json <<'EOF'
 {
   "db_path": "/tmp/amp-example.db",
@@ -23,7 +22,7 @@ cat > /tmp/amp-example-config.json <<'EOF'
   ]
 }
 EOF
-.venv/bin/python -m inquiryon_amp_community.api --config /tmp/amp-example-config.json
+.venv-server/bin/python -m inquiryon_amp_community.api --config /tmp/amp-example-config.json
 ```
 
 Leave that running. In a second terminal:
@@ -31,8 +30,8 @@ Leave that running. In a second terminal:
 ## 2. Install the SDK and set environment variables
 
 ```bash
-cd amp-sdk-python
-python3 -m venv .venv && .venv/bin/pip install -e .
+git clone https://github.com/inquiryon/amp-sdk-python.git && cd amp-sdk-python
+python3 -m venv .venv && .venv/bin/pip install inquiryon-amp-sdk
 export AMP_BASE_URL=http://127.0.0.1:8080
 export AMP_REVIEWER_TOKEN=fictional-reviewer-token-0001
 export AMP_AGENT_TOKEN=fictional-agent-token-0001
